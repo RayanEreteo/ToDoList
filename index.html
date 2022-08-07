@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Liste de tâche</title>
+    <link rel="stylesheet" href="./CSS/style.css">
+    <script src="https://kit.fontawesome.com/7fd6573af6.js" crossorigin="anonymous"></script>
+</head>
+
+<body>
+    <div class="defaultLayer"></div>
+    <h1 id="title">Liste de tâche</h1>
+    <div class="options-container">
+        <!--Creation de la liste d'options-->
+        <ul>
+            <li title="Lien vers mon github"><a href="https://github.com/RayanEreteo" target="_blank"><i class="fa-brands fa-github"></i></a></li>
+            <li title="Visiter mon portfolio"><a href="#"><i class="fa-solid fa-globe"></i></a></li>
+            <li><button title="Muter le son" class="mute-btn"><i class="fa-solid fa-volume-high"></i></button></li>
+        </ul>
+    </div>
+    <!--Creation du boutton 'options' pour mobile-->
+    <div class="mobile-nav-options"><button id="show_options"><i class="fa-solid fa-gears"></i></button></div>
+    <!--Creation de la liste d'options pour mobile-->
+    <div class="mobile-nav-button--default">
+        <ul>
+            <li title="Lien vers mon github"><a href="https://github.com/RayanEreteo" target="_blank"><i class="fa-brands fa-github"></i></a></li>
+            <li title="Visiter mon portfolio"><a href="#"><i class="fa-solid fa-globe"></i></a></li>
+            <li><button title="Muter le son" class="mobile-mute-btn"><i class="fa-solid fa-volume-high"></i></button>
+            </li>
+        </ul>
+    </div>
+    <!--Creation de l'input et du boutton-->
+    <div class="input-container">
+        <form>
+            <input type="text" name="" id="input" placeholder='Entrer votre tâche' autocomplete="off" maxlength="31">
+            <button id="add"><i class="fa-solid fa-plus"></i></button>
+        </form>
+    </div>
+    <!--Creation de la liste de tâche-->
+    <div class="list-container">
+        <ul class="list"></ul>
+    </div>
+    <!--Lier le script-->
+    <script src="./JS/app.js" defer></script>
+</body>
+
+</html>
