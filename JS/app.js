@@ -1,44 +1,50 @@
-//Declaration des variables
+//UPPERCASE COMMENT -- Category
+//lowercase comment -- Important Line explanation
+
+
+//VARIABLE DECLARATION
+//get important html element
 let button = document.querySelector('#add');
 let muteButton = document.querySelector(".mute-btn");
 let mobileMuteButton = document.querySelector(".mobile-mute-btn");
 let inputField = document.querySelector('#input');
 let list = document.querySelector(".list");
 let mobileOptionsList = document.querySelector(".mobile-nav-button--default");
-let audio = new Audio("./SOUND/ajout.wav");
-let isMuted = false;
 let optionsButton = document.querySelector("#show_options");
-let blackLayer = document.querySelector('.defaultLayer');
+let blackLayer = document.querySelector(".defaultLayer");
+//declare a variable that contain a sound
+let audio = new Audio("./SOUND/ajout.wav");
+//boolean to check if the sound is muted
+let isMuted = false;
 
-// Creer un interval pour vérifier la largeur de la fenetre
+// Create an infinite interval of 249ms to call the funtion 'checkScreenSize'
 
 setInterval(checkScreenSize, 249);
 
-// Ecouteurs
+// EVENT LISTENERS
 button.addEventListener('click', AddToDo);
 list.addEventListener('click', deleteCheck);
 
 muteButton.addEventListener('click', toggleMute);
 mobileMuteButton.addEventListener('click', toggleMute);
-
 optionsButton.addEventListener('click', toggleOptions);
 
 
-// Fonctions
+// FUNCTIONS
 
-// Fonction pour ajouter une tâche
+// Function to add a task
 function AddToDo(event){
     event.preventDefault();
     if(inputField.value.length > 0){
-        //créer la boite de l'item
+        //make a div of the item
         const todoDiv = document.createElement("div");
         todoDiv.classList.add("tache");
-        //créer l'item
+        //make item
         const newTodo = document.createElement("li");
         newTodo.innerText = inputField.value;
         newTodo.classList.add("tache-item");
         todoDiv.appendChild(newTodo);
-        //Ajouter le bouton 'completer' et 'supprimer'
+        //Add 'Completed' and 'Delete' button
         const completedButton = document.createElement("button");
         completedButton.innerHTML = '<i class="fas fa-check"></i>';
         completedButton.classList.add('complete-btn');
@@ -48,18 +54,18 @@ function AddToDo(event){
         deleteButton.innerHTML = '<i class="fas fa-trash"></i>';
         deleteButton.classList.add("delete-btn");
         todoDiv.appendChild(deleteButton);
-        //Ajouter la boite a la list 'ul'
+        //Add the item to the to-do list
         list.appendChild(todoDiv);
-        // Vider le champ de caractères
+        //Clear the input
         inputField.value = "";
-        //jouer le son
+        //Play the sound
         audio.play();
     }
 }
 
 function deleteCheck(e){
     const item = e.target;
-    //Effacer la tache
+    //Delete task
     if(item.classList[0] === 'delete-btn'){
         const todo = item.parentElement;
         todo.classList.add('fall');
@@ -67,43 +73,45 @@ function deleteCheck(e){
             todo.remove();
         })
     }
-    // Tache éfféctué 
+    //Make task in the 'Completed' state 
     if (item.classList[0] === "complete-btn") {
         const todo = item.parentElement;
         todo.classList.toggle('completed');
     }
 }
 
-// Fonctions pour muter ou remettre le son
+//Function to mute audio
 
 function toggleMute(){
-    //Verifier si la variable 'isMuted' est faux ou vraie
-    if(!isMuted){
-        //Si la variable a la valeur faux alors on change le logo est on change la boolean en vrai en mettant le son a 0
-        muteButton.innerHTML = '<i class="fa-solid fa-volume-xmark"></i>';
-        mobileMuteButton.innerHTML = '<i class="fa-solid fa-volume-xmark"></i>';
-        isMuted = true;
-        audio.volume = 0;
-    }else{
-        //Si la variable a la valeur vrai alors on change le logo est on change la boolean en faux en mettant le son a 0.5
-        isMuted = false;
-        muteButton.innerHTML = '<i class="fa-solid fa-volume-high"></i>';
-        mobileMuteButton.innerHTML = '<i class="fa-solid fa-volume-high"></i>';
-        audio.volume = 0.5;
-    }
+  //Check if the 'isMuted' variable is false or true
+  if (!isMuted) {
+    //If the variable has the value false then we change the logo and we change the boolean to true by setting the sound to 0
+    muteButton.innerHTML = '<i class="fa-solid fa-volume-xmark"></i>';
+    mobileMuteButton.innerHTML = '<i class="fa-solid fa-volume-xmark"></i>';
+    isMuted = true;
+    audio.volume = 0;
+  } else {
+    //If the variable has the value true then we change the logo and we change the boolean to false by setting the sound to 0.5
+    isMuted = false;
+    muteButton.innerHTML = '<i class="fa-solid fa-volume-high"></i>';
+    mobileMuteButton.innerHTML = '<i class="fa-solid fa-volume-high"></i>';
+    audio.volume = 0.5;
+  }
 }
 
-// Fonctions pour basculer l'apparition du menu options pour mobile
+//Functions to toggle the appearance of the options menu for mobile
 
 function toggleOptions(){
     blackLayer.classList.toggle('black-layer');
     mobileOptionsList.classList.toggle("mobile-nav-button");
 }
 
-//fonctions appelez plus haut pour vérifier la largeur de la fenêtre
+//Functions call above to check window width
 
 function checkScreenSize(){
+    //Declare a variable that contain the screen width
     let screenWidth = window.innerWidth;
+    //Check if screen width is superior or equal to 752px
     if(screenWidth >= 752){
         blackLayer.className = 'defaultLayer';
         mobileOptionsList.className = "mobile-nav-button--default";
